@@ -1,0 +1,353 @@
+/* ==========================================
+   心屿 MindIsle - 页面特定样式 v2.0
+   增强视觉效果与空间感
+   ========================================== */
+
+/* === 心情气象站页面 === */
+#mood-page {
+  background:
+    radial-gradient(ellipse at 30% 10%, rgba(232, 180, 184, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, rgba(184, 212, 200, 0.1) 0%, transparent 40%),
+    linear-gradient(180deg, var(--color-bg) 0%, #FFF9F5 100%);
+}
+
+#mood-page .page-header h1 {
+  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-sakura) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#mood-page .mood-selector {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,249,245,0.9) 100%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E8B4B8' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+#mood-page .mood-calendar {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,246,243,0.9) 100%),
+    radial-gradient(circle at 20% 80%, rgba(167, 199, 231, 0.1) 0%, transparent 50%);
+}
+
+#mood-page .mood-stats {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(253,252,251,0.95) 100%);
+}
+
+/* === 情绪山海页面 === */
+#mountain-page {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(167, 199, 231, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 60%, rgba(232, 180, 184, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 20% 80%, rgba(184, 212, 200, 0.1) 0%, transparent 40%),
+    linear-gradient(180deg, #F5F2ED 0%, #E8D8C8 100%);
+}
+
+#mountain-page .mountain-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#mountain-page .emotion-sliders {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,249,245,0.95) 100%),
+    linear-gradient(180deg, rgba(255,255,255,0.5) 0%, transparent 100%);
+}
+
+#mountain-page .mountain-canvas-container {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,246,243,0.95) 100%),
+    radial-gradient(circle at 50% 100%, rgba(232, 180, 184, 0.1) 0%, transparent 50%);
+}
+
+#mountain-page .mountain-meanings {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(253,252,251,0.95) 100%);
+}
+
+/* === 钓鱼游戏页面 === */
+#fishing-page {
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(167, 199, 231, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 70%, rgba(184, 212, 200, 0.1) 0%, transparent 40%),
+    linear-gradient(180deg, #F0F7F4 0%, #E8F0EC 100%);
+}
+
+#fishing-page .fishing-game {
+  max-width: 850px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(74, 74, 74, 0.1);
+}
+
+/* === 互助树洞页面 === */
+#treehole-page {
+  background:
+    radial-gradient(ellipse at 30% 70%, rgba(232, 180, 184, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 30%, rgba(197, 185, 212, 0.1) 0%, transparent 40%),
+    linear-gradient(180deg, var(--color-bg) 0%, #F5F2ED 100%);
+}
+
+#treehole-page .post-btn {
+  max-width: 320px;
+}
+
+#treehole-page .posts-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* === 页面切换过渡 === */
+.page-transition {
+  animation: pageExit 0.4s ease forwards;
+}
+
+@keyframes pageExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+/* === 心情图标激活动效 === */
+.mood-icon.just-selected {
+  animation: moodPop 0.5s var(--ease-bounce);
+}
+
+@keyframes moodPop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.4); }
+  50% { transform: scale(0.9); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1.1); }
+}
+
+/* === 保存成功动效 === */
+.save-success {
+  animation: savePulse 0.8s ease;
+}
+
+@keyframes savePulse {
+  0% { box-shadow: var(--shadow-md); }
+  30% { box-shadow: 0 0 50px rgba(232, 180, 184, 0.8); }
+  60% { box-shadow: 0 0 30px rgba(232, 180, 184, 0.5); }
+  100% { box-shadow: var(--shadow-md); }
+}
+
+/* === 点赞动效 === */
+.like-animation {
+  animation: likePop 0.6s var(--ease-bounce);
+}
+
+@keyframes likePop {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.4) rotate(-5deg); }
+  40% { transform: scale(0.85) rotate(5deg); }
+  60% { transform: scale(1.15) rotate(-3deg); }
+  80% { transform: scale(0.95) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* === 加载状态 === */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-sakura);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* === 空状态 === */
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--color-text-secondary);
+}
+
+.empty-state .empty-icon {
+  font-size: 56px;
+  margin-bottom: var(--space-lg);
+  opacity: 0.6;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+}
+
+.empty-state p {
+  font-size: var(--text-base);
+  line-height: 1.8;
+}
+
+/* === 心情色卡图标 === */
+.mood-icon[data-mood="sunny"] { --mood-color: #F4C7A8; }
+.mood-icon[data-mood="cloudy"] { --mood-color: #A7C7E7; }
+.mood-icon[data-mood="rainy"] { --mood-color: #7A9BBF; }
+.mood-icon[data-mood="storm"] { --mood-color: #C5B9D4; }
+.mood-icon[data-mood="rainbow"] { --mood-color: #B8D4C8; }
+.mood-icon[data-mood="snow"] { --mood-color: #D4D4D4; }
+.mood-icon[data-mood="moon"] { --mood-color: #9B9BBF; }
+
+.mood-icon:hover {
+  box-shadow: 0 20px 40px color-mix(in srgb, var(--mood-color) 30%, transparent);
+}
+
+.mood-icon.selected {
+  box-shadow:
+    0 20px 40px color-mix(in srgb, var(--mood-color) 35%, transparent),
+    0 0 40px color-mix(in srgb, var(--mood-color) 25%, transparent);
+}
+
+/* === 卡片悬浮装饰 === */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(232, 180, 184, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* === 按钮点击涟漪效果 === */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-primary:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* === 滚动条样式 === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-sakura) 0%, var(--color-lavender) 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #DBA3A7 0%, var(--color-sakura) 100%);
+}
+
+/* === 选中文字颜色 === */
+::selection {
+  background: rgba(232, 180, 184, 0.4);
+  color: var(--color-text);
+}
+
+/* === 页面入场动画 === */
+.page.active .card {
+  animation: cardEnter 0.6s var(--ease-smooth) backwards;
+}
+
+.page.active .card:nth-child(1) { animation-delay: 0.1s; }
+.page.active .card:nth-child(2) { animation-delay: 0.2s; }
+.page.active .card:nth-child(3) { animation-delay: 0.3s; }
+.page.active .card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* === 分割线装饰 === */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+  color: var(--color-text-light);
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-border) 50%, transparent 100%);
+}
+
+.section-divider span {
+  font-size: var(--text-lg);
+}
+
+/* === 浮动装饰元素 === */
+.floating-decoration {
+  position: absolute;
+  font-size: 24px;
+  opacity: 0.3;
+  animation: floatRandom 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatRandom {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-5deg);
+  }
+  75% {
+    transform: translateY(-25px) rotate(5deg);
+  }
+}

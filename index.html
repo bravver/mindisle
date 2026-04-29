@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心屿 MindIsle - 每一座孤岛，都值得被看见</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/island.css">
+</head>
+<body>
+  <!-- 背景装饰 -->
+  <div class="bg-decoration">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+  </div>
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo" data-page="home">
+        <span class="logo-icon">🏝️</span>
+        <span class="logo-text">心屿</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#" class="nav-link active" data-page="mood">🌤️ 心情气象站</a></li>
+        <li><a href="#" class="nav-link" data-page="mountain">🏔️ 情绪山海</a></li>
+        <li><a href="#" class="nav-link" data-page="island">🌊 汐岛</a></li>
+        <li><a href="#" class="nav-link" data-page="fishing">🎣 思绪钓鱼</a></li>
+        <li><a href="#" class="nav-link" data-page="treehole">🌳 互助树洞</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="main-content">
+
+    <!-- 心情气象站 -->
+    <section id="mood-page" class="page active">
+      <div class="page-header">
+        <h1>🌤️ 今日心情</h1>
+        <p class="date" id="current-date"></p>
+      </div>
+
+      <!-- 心情选择 -->
+      <div class="mood-selector card">
+        <p class="mood-prompt">此刻，你的心情是...</p>
+        <div class="mood-icons">
+          <button class="mood-icon" data-mood="sunny" title="晴天 - 开心">
+            <span class="mood-emoji">☀️</span>
+            <span class="mood-label">晴天</span>
+          </button>
+          <button class="mood-icon" data-mood="cloudy" title="多云 - 平静">
+            <span class="mood-emoji">⛅</span>
+            <span class="mood-label">多云</span>
+          </button>
+          <button class="mood-icon" data-mood="rainy" title="小雨 - 难过">
+            <span class="mood-emoji">🌧️</span>
+            <span class="mood-label">小雨</span>
+          </button>
+          <button class="mood-icon" data-mood="storm" title="雷暴 - 焦虑">
+            <span class="mood-emoji">⛈️</span>
+            <span class="mood-label">雷暴</span>
+          </button>
+          <button class="mood-icon" data-mood="rainbow" title="彩虹 - 惊喜">
+            <span class="mood-emoji">🌈</span>
+            <span class="mood-label">彩虹</span>
+          </button>
+          <button class="mood-icon" data-mood="snow" title="雪花 - 孤独">
+            <span class="mood-emoji">❄️</span>
+            <span class="mood-label">雪花</span>
+          </button>
+          <button class="mood-icon" data-mood="moon" title="月亮 - 思考">
+            <span class="mood-emoji">🌙</span>
+            <span class="mood-label">月亮</span>
+          </button>
+        </div>
+        <div class="mood-input-area">
+          <textarea id="mood-text" placeholder="写下此刻的想法...（可选）" rows="3"></textarea>
+          <button class="btn-primary" id="save-mood-btn">✨ 记录心情</button>
+        </div>
+      </div>
+
+      <!-- 心情日历 -->
+      <div class="mood-calendar card">
+        <h3>📅 心情日历</h3>
+        <div class="calendar-nav">
+          <button class="btn-text" id="prev-month">◀</button>
+          <span id="calendar-month"></span>
+          <button class="btn-text" id="next-month">▶</button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+        <div class="mood-legend">
+          <span class="legend-item"><span class="legend-dot" style="background:#F4C7A8"></span> 压力</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#C5B9D4"></span> 焦虑</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#B8D4C8"></span> 平静</span>
+        </div>
+      </div>
+
+      <!-- 心情统计 -->
+      <div class="mood-stats card">
+        <h3>💭 你的心情故事</h3>
+        <div class="stats-empty" id="stats-empty">
+          <p>还没有记录哦~开始记录你的心情吧</p>
+        </div>
+        <div class="stats-content" id="stats-content" style="display:none;">
+          <div class="stats-summary">
+            <div class="stat-item">
+              <span class="stat-number" id="total-days">0</span>
+              <span class="stat-label">天记录</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="total-moods">0</span>
+              <span class="stat-label">次打卡</span>
+            </div>
+          </div>
+          <div class="mood-timeline" id="mood-timeline"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 情绪山海 -->
+    <section id="mountain-page" class="page">
+      <div class="page-header">
+        <h1>🏔️ 情绪山海</h1>
+        <p class="subtitle">将你的情绪化为有形的山脉</p>
+      </div>
+
+      <div class="mountain-container">
+        <div class="emotion-sliders card">
+          <div class="slider-group">
+            <label>压力指数 <span id="pressure-value">50</span>%</label>
+            <input type="range" id="pressure-slider" min="0" max="100" value="50">
+          </div>
+          <div class="slider-group">
+            <label>焦虑指数 <span id="anxiety-value">50</span>%</label>
+            <input type="range" id="anxiety-slider" min="0" max="100" value="50">
+          </div>
+          <div class="slider-group">
+            <label>孤独指数 <span id="lonely-value">50</span>%</label>
+            <input type="range" id="lonely-slider" min="0" max="100" value="50">
+          </div>
+        </div>
+
+        <div class="mountain-canvas-container card">
+          <canvas id="mountain-canvas" width="800" height="400"></canvas>
+          <div class="mountain-description" id="mountain-desc">
+            你的情绪山脉正在生成...
+          </div>
+        </div>
+
+        <div class="mountain-actions">
+          <button class="btn-secondary" id="save-mountain-btn">📸 保存图片</button>
+          <button class="btn-text" id="reset-mountain-btn">🔄 重置</button>
+        </div>
+
+        <div class="mountain-meanings card">
+          <h3>💡 解读你的山脉</h3>
+          <div class="meaning-content" id="meaning-content">
+            <p>调整上方的滑动条，生成属于你的情绪山脉。每座山都代表着不同的情绪状态，山峰越高，代表该项情绪越强烈。</p>
+            <ul>
+              <li><strong>压力山</strong>：代表你当前感受到的压力程度</li>
+              <li><strong>焦虑山</strong>：代表你对未来的担忧和不安</li>
+              <li><strong>孤独山</strong>：代表你感受到的孤独感</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 汐岛 - 生理周期关怀 -->
+    <section id="island-page" class="page">
+      <div class="page-header">
+        <h1>🌊 汐岛</h1>
+        <p class="subtitle">根据你的周期，定制专属的治愈时光</p>
+      </div>
+
+      <!-- 登岛登记 -->
+      <div class="island-welcome" id="island-welcome">
+        <h2>🌸 欢迎来到汐岛</h2>
+        <p>在登岛前，请告诉我们一些关于你周期的小秘密~</p>
+        <form class="period-form" id="period-form">
+          <label>最近一次月经开始日期</label>
+          <input type="date" id="period-date" required>
+          <label>周期长度（天）</label>
+          <input type="number" id="cycle-length" value="28" min="21" max="35">
+          <label>月经持续时间（天）</label>
+          <input type="number" id="period-length" value="5" min="2" max="10">
+          <button type="submit" class="btn-primary">登岛 🌊</button>
+        </form>
+      </div>
+
+      <!-- 岛屿主场景 -->
+      <div class="island-scene" id="island-scene" style="display:none;">
+        <!-- 天气背景 -->
+        <div class="scene-weather rainy">
+          <div class="scene-sun"></div>
+        </div>
+
+        <!-- 雨滴效果 -->
+        <div class="rain-container" id="rain-container"></div>
+
+        <!-- 雾气效果 -->
+        <div class="mist-container" id="mist-container">
+          <div class="mist"></div>
+        </div>
+
+        <!-- 岛屿剪影 -->
+        <div class="island-silhouette">
+          <svg viewBox="0 0 800 120" preserveAspectRatio="none">
+            <path fill="rgba(0,0,0,0.3)" d="M0,120 L0,80 Q100,60 200,70 T400,50 T600,65 T800,55 L800,120 Z"/>
+            <path fill="rgba(0,0,0,0.2)" d="M0,120 L0,90 Q150,70 300,80 T500,70 T700,85 T800,75 L800,120 Z"/>
+          </svg>
+        </div>
+
+        <!-- 当前周期指示 -->
+        <div class="cycle-indicator">
+          <span class="cycle-icon">🌧️</span>
+          <span class="cycle-name">月经期</span>
+          <span class="cycle-desc">细雨绵绵，静谧自愈</span>
+        </div>
+      </div>
+
+      <!-- 功能模块 -->
+      <div class="island-modules" id="island-modules" style="display:none;">
+        <div class="island-module" data-module="ship" onclick="openIslandSubpage('ship')">
+          <span class="module-icon">⛵</span>
+          <span class="module-name">海船</span>
+          <span class="module-desc">记录工作与学习</span>
+        </div>
+        <div class="island-module" data-module="gym" onclick="openIslandSubpage('gym')">
+          <span class="module-icon">🏖️</span>
+          <span class="module-name">海边健身房</span>
+          <span class="module-desc">适合时期的运动</span>
+        </div>
+        <div class="island-module" data-module="kitchen" onclick="openIslandSubpage('kitchen')">
+          <span class="module-icon">🍳</span>
+          <span class="module-name">海边厨房</span>
+          <span class="module-desc">调养身体的美食</span>
+        </div>
+        <div class="island-module" data-module="beach" onclick="openIslandSubpage('beach')">
+          <span class="module-icon">🏝️</span>
+          <span class="module-name">情绪海滩</span>
+          <span class="module-desc">记录此刻心情</span>
+        </div>
+      </div>
+
+      <!-- ========== 子模块：海船 ========== -->
+      <div id="ship-module-page" class="island-subpage">
+        <div class="subpage-header" onclick="closeIslandSubpage()">
+          <div class="back-btn">←</div>
+          <div>
+            <strong>⛵ 海船</strong>
+            <p style="font-size:12px;color:#8A8A8A;margin:0;">记录你的工作与学习时光</p>
+          </div>
+        </div>
+
+        <div class="ship-scene">
+          <div class="ship-container">
+            <div class="ship docked">⛵</div>
+            <div class="waves-animation">
+              <div class="wave-line"></div>
+            </div>
+          </div>
+          <div class="ship-status">
+            <span class="status-icon">📍</span>
+            <span class="ship-status-text">入港停泊</span>
+          </div>
+        </div>
+
+        <div class="ship-log card">
+          <h3>📔 航海日志</h3>
+          <div class="log-entries"></div>
+          <div class="log-input">
+            <textarea placeholder="写下此刻的心情或学习心得..." rows="2"></textarea>
+            <button class="btn-primary" onclick="saveShipLog()">记录</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== 子模块：海边厨房 ========== -->
+      <div id="kitchen-module-page" class="island-subpage">
+        <div class="subpage-header" onclick="closeIslandSubpage()">
+          <div class="back-btn">←</div>
+          <div>
+            <strong>🍳 海边厨房</strong>
+            <p style="font-size:12px;color:#8A8A8A;margin:0;">根据周期调养身体</p>
+          </div>
+        </div>
+
+        <div class="kitchen-scene rainy">
+          <div class="kitchen-interior">
+            <div class="kitchen-title">🌧️ 月经期的海边厨房</div>
+            <div class="kitchen-items">
+              <div class="kitchen-item" onclick="showKitchenTip('🍫')">
+                <span class="item-icon">🍫</span>
+                <span class="item-name">热可可</span>
+              </div>
+              <div class="kitchen-item" onclick="showKitchenTip('🍠')">
+                <span class="item-icon">🍠</span>
+                <span class="item-name">烤红薯</span>
+              </div>
+              <div class="kitchen-item" onclick="showKitchenTip('🌿')">
+                <span class="item-icon">🌿</span>
+                <span class="item-name">花草茶</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:var(--space-lg);">
+          <h3>💡 小贴士</h3>
+          <p id="kitchen-tip" style="color:var(--color-text-secondary);font-size:14px;line-height:1.8;">
+            月经期适合温热的食物，热可可含有黄酮醇，有助于改善心情。用余温慢慢烘烤红薯，保留最纯粹的味道~
+          </p>
+        </div>
+      </div>
+
+      <!-- ========== 子模块：情绪海滩 ========== -->
+      <div id="beach-module-page" class="island-subpage">
+        <div class="subpage-header" onclick="closeIslandSubpage()">
+          <div class="back-btn">←</div>
+          <div>
+            <strong>🏝️ 情绪海滩</strong>
+            <p style="font-size:12px;color:#8A8A8A;margin:0;">记录并收藏你的情绪</p>
+          </div>
+        </div>
+
+        <div class="beach-scene rainy">
+          <p style="color:white;text-shadow:0 2px 10px rgba(0,0,0,0.3);padding:20px;">
+            🌧️ 月经期的海面平静如镜，适合静心记录
+          </p>
+        </div>
+
+        <div class="emotion-selector card">
+          <h3>此刻的心情</h3>
+          <div class="emotion-icons">
+            <div class="emotion-icon" data-emotion="happy" onclick="selectEmotion('happy')">😊</div>
+            <div class="emotion-icon" data-emotion="calm" onclick="selectEmotion('calm')">😌</div>
+            <div class="emotion-icon" data-emotion="anxious" onclick="selectEmotion('anxious')">😰</div>
+            <div class="emotion-icon" data-emotion="sad" onclick="selectEmotion('sad')">😢</div>
+            <div class="emotion-icon" data-emotion="angry" onclick="selectEmotion('angry')">😤</div>
+            <div class="emotion-icon" data-emotion="lonely" onclick="selectEmotion('lonely')">🥺</div>
+          </div>
+          <div class="emotion-input">
+            <textarea placeholder="记录此刻的想法...（可选）" rows="3"></textarea>
+            <button class="btn-primary" onclick="saveEmotion()">收藏这份心情</button>
+          </div>
+        </div>
+
+        <div class="emotion-collection card">
+          <h3>💎 情绪收藏</h3>
+          <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:var(--space-md);">
+            你的心情会被封存在不同的贝壳和石头中
+          </p>
+          <div class="collection-items">
+            <div class="collection-item pebble" data-type="pebble" data-count="0">🌧️</div>
+            <div class="collection-item shell" data-type="shell" data-count="0">🐚</div>
+            <div class="collection-item pearl" data-type="pearl" data-count="0">✨</div>
+            <div class="collection-item starfish" data-type="starfish" data-count="0">🌟</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== 子模块：健身房 ========== -->
+      <div id="gym-module-page" class="island-subpage">
+        <div class="subpage-header" onclick="closeIslandSubpage()">
+          <div class="back-btn">←</div>
+          <div>
+            <strong>🏖️ 海边健身房</strong>
+            <p style="font-size:12px;color:#8A8A8A;margin:0;">选择适合今天的运动</p>
+          </div>
+        </div>
+
+        <div class="gym-scene rainy">
+          <div class="gym-title">🌧️ 月经期的运动建议</div>
+          <div class="gym-equipment">
+            <div class="equipment-item">
+              <span class="equip-icon">🧘</span>
+              <span class="equip-name">轻柔瑜伽</span>
+            </div>
+            <div class="equipment-item">
+              <span class="equip-icon">🧘‍♀️</span>
+              <span class="equip-name">冥想放松</span>
+            </div>
+            <div class="equipment-item">
+              <span class="equip-icon">🚶</span>
+              <span class="equip-name">慢步呼吸</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:var(--space-lg);">
+          <h3>🌸 经期运动小贴士</h3>
+          <p style="color:var(--color-text-secondary);font-size:14px;line-height:1.8;">
+            月经期适合轻柔的运动，如瑜伽和冥想。避免剧烈运动，给身体充分的休息和滋养。
+          </p>
+        </div>
+      </div>
+
+      <!-- 浮潜区 -->
+      <div class="diving-zone" id="diving-zone">
+        <h3>🤿 深海浮潜区</h3>
+        <div class="diving-bubbles"></div>
+        <div class="diving-instruction">
+          <p>长按屏幕开始下潜，在下潜过程中双击写下你的感受</p>
+          <p style="margin-top:10px;font-size:12px;opacity:0.7;">
+            💎 你的文字会被封存在蓝色玻璃瓶中，成为深海里的一盏明灯
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 思绪钓鱼 -->
+    <section id="fishing-page" class="page">
+      <div class="page-header">
+        <h1>🎣 思绪钓鱼</h1>
+        <p class="subtitle">拖动摇杆，把握时机，钓起属于你的小确幸</p>
+      </div>
+
+      <div class="fishing-game card">
+        <!-- 游戏画布区域 -->
+        <div class="fishing-game-area" id="fishing-game-area">
+          <canvas id="fishing-canvas" width="800" height="500"></canvas>
+
+          <!-- 抛竿/收竿按钮 -->
+          <div class="fishing-actions">
+            <button class="btn-primary" id="cast-btn">🪤 抛竿</button>
+            <button class="btn-secondary" id="reel-btn" disabled>📥 收竿</button>
+          </div>
+
+          <!-- 计时器 -->
+          <div class="fishing-timer" id="fishing-timer">00:00</div>
+
+          <!-- 分数/鱼数 -->
+          <div class="fishing-score">
+            <span>🎣 钓到: <strong id="fish-count">0</strong> 条</span>
+          </div>
+        </div>
+
+        <!-- 鱼获展示 -->
+        <div class="fishing-caught-list" id="fishing-caught-list">
+          <h3>📿 本次鱼获</h3>
+          <div class="caught-fishes" id="caught-fishes">
+            <p class="no-fish">还没有钓到鱼哦~</p>
+          </div>
+        </div>
+
+        <!-- 操作说明 -->
+        <div class="fishing-instructions">
+          <h3>🎮 游戏说明</h3>
+          <p><strong>拖动</strong> 或 <strong>左右移动</strong> 摇杆控制方向</p>
+          <p><strong>点击抛竿</strong> 放下鱼钩，<strong>点击收竿</strong> 拉起鱼钩</p>
+          <p>不同鱼儿会带来不同的寄语 🌟</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 互助树洞 -->
+    <section id="treehole-page" class="page">
+      <div class="page-header">
+        <h1>🌳 互助树洞</h1>
+        <p class="subtitle">在这里，你的故事会被温柔以待</p>
+      </div>
+
+      <button class="btn-primary post-btn" id="new-post-btn">✏️ 发布新帖</button>
+
+      <!-- 发帖弹窗 -->
+      <div class="modal" id="post-modal">
+        <div class="modal-content card">
+          <span class="modal-close" id="close-modal">×</span>
+          <h3>📝 分享你的心情</h3>
+          <textarea id="post-content" placeholder="在这里写下你的故事...（140字以内）" maxlength="140" rows="5"></textarea>
+          <div class="post-length"><span id="post-count">0</span>/140</div>
+          <button class="btn-primary" id="submit-post-btn">🌱 发布</button>
+        </div>
+      </div>
+
+      <!-- 帖子列表 -->
+      <div class="posts-container" id="posts-container">
+        <div class="post-empty" id="post-empty">
+          <p>还没有帖子，成为第一个分享的人吧~</p>
+        </div>
+        <div id="posts-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 提示消息 -->
+  <div class="toast" id="toast">
+    <span id="toast-message"></span>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <p>🌊 心屿 MindIsle · 每一座孤岛，都值得被看见</p>
+    <p class="footer-note">Made with 💗 for everyone who needs a place to belong</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/island.js"></script>
+</body>
+</html>
